@@ -5,7 +5,7 @@ LABEL maintainer="The Prometheus Authors <prometheus-developers@googlegroups.com
 
 ARG ARCH="amd64"
 ARG OS="linux"
-COPY ./mysqld_exporter /bin/mysqld_exporter
+COPY --chown=nobody:nobody ./mysqld_exporter /bin/mysqld_exporter 
 
 EXPOSE      9104
 USER        nobody
