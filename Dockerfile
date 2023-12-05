@@ -1,7 +1,7 @@
 ARG ARCH="amd64"
 ARG OS="linux"
 
-FROM golang:1.21 as builder
+FROM golang:1.21-alpine as builder
 COPY . /build
 WORKDIR /build
 RUN go build
