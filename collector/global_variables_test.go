@@ -38,6 +38,7 @@ func TestScrapeGlobalVariables(t *testing.T) {
 		AddRow("userstat", "OFF").
 		AddRow("transaction_prealloc_size", "4096").
 		AddRow("tx_isolation", "REPEATABLE-READ").
+		AddRow("gtid_current_pos", "0-1-8228506").
 		AddRow("tmp_table_size", "16777216").
 		AddRow("tmpdir", "/tmp").
 		AddRow("sync_binlog", "0").
@@ -62,6 +63,9 @@ func TestScrapeGlobalVariables(t *testing.T) {
 		{labels: labelMap{}, value: 28800, metricType: dto.MetricType_GAUGE},
 		{labels: labelMap{}, value: 0, metricType: dto.MetricType_GAUGE},
 		{labels: labelMap{}, value: 4096, metricType: dto.MetricType_GAUGE},
+		{labels: labelMap{}, value: 0, metricType: dto.MetricType_GAUGE},
+		{labels: labelMap{}, value: 1, metricType: dto.MetricType_GAUGE},
+		{labels: labelMap{}, value: 8228506, metricType: dto.MetricType_GAUGE},
 		{labels: labelMap{}, value: 16777216, metricType: dto.MetricType_GAUGE},
 		{labels: labelMap{}, value: 0, metricType: dto.MetricType_GAUGE},
 		{labels: labelMap{}, value: 1, metricType: dto.MetricType_GAUGE},
