@@ -156,6 +156,7 @@ func (ScrapeGlobalVariables) Scrape(ctx context.Context, instance *instance, ch 
 		"wsrep_provider_options": "",
 		"tx_isolation":           "",
 		"transaction_isolation":  "",
+		"gtid_current_pos": 	  "",
 	}
 
 	for globalVariablesRows.Next() {
@@ -218,6 +219,30 @@ func (ScrapeGlobalVariables) Scrape(ctx context.Context, instance *instance, ch 
 				[]string{"level"}, nil),
 			prometheus.GaugeValue,
 			1, level,
+		)
+	}
+
+	// gtid_current_pos metric
+	if textItems["gtid_current_pos"] != "" {
+		gtid := strings.Split(textItems["gtid_current_pos"],"-")
+		part1, _ := strconv.ParseFloat(gtid[0],64)
+		part2, _ := strconv.ParseFloat(gtid[1],64)
+		part3, _ := strconv.ParseFloat(gtid[2],64)
+
+		ch <- prometheus.MustNewConstMetric(
+			prometheus.NewDesc(prometheus.BuildFQName(namespace, "gtid", "current_pos_part1"), "MySQL gtid current position (part1).",nil, nil),
+			prometheus.GaugeValue,
+			part1,
+		)	
+		ch <- prometheus.MustNewConstMetric(
+			prometheus.NewDesc(prometheus.BuildFQName(namespace, "gtid", "current_pos_part2"), "MySQL gtid current position (part2).", nil, nil),
+			prometheus.GaugeValue,
+			part2,
+		)
+		ch <- prometheus.MustNewConstMetric(
+			prometheus.NewDesc(prometheus.BuildFQName(namespace, "gtid", "current_pos_part3"), "MySQL gtid current position (part3).", nil, nil),
+			prometheus.GaugeValue,
+			part3,
 		)
 	}
 

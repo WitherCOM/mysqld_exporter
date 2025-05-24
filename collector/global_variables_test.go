@@ -39,6 +39,7 @@ func TestScrapeGlobalVariables(t *testing.T) {
 		AddRow("userstat", "OFF").
 		AddRow("transaction_prealloc_size", "4096").
 		AddRow("tx_isolation", "REPEATABLE-READ").
+		AddRow("gtid_current_pos", "0-1-8228506").
 		AddRow("tmp_table_size", "16777216").
 		AddRow("tmpdir", "/tmp").
 		AddRow("sync_binlog", "0").
